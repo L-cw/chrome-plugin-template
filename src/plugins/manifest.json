@@ -1,0 +1,36 @@
+{
+  "name": "FE工具",
+  "description": "FE工具!",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_title": "FE开发者工具",
+    "default_popup": "pages/popup/index.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["assets/popup.js"],
+      "css": [],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["http://localhost:*/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["QCefClient.js"],
+    "matches": ["http://localhost:*/*"]
+  }],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "devtools_page": "devtool-background.html"
+}
